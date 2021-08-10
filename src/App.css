@@ -1,17 +1,18 @@
-body{
-    background-color: #f0f2f5;
+body {
+  background-color: #f0f2f5;
 }
 .ant-layout-header {
-    background-color: #2930ff;
+  background-color: #2930ff;
 }
 .ant-modal-body {
-    overflow-x: scroll;
+  overflow-x: scroll;
 }
 .item .ant-col:hover {
-    cursor: pointer;
-    box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 15px -3px, rgba(0, 0, 0, 0.05) 0px 4px 6px -2px;
+  cursor: pointer;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 15px -3px,
+    rgba(0, 0, 0, 0.05) 0px 4px 6px -2px;
 }
 
-.organigram{
-    overflow-x: auto;
+.organigram {
+  overflow-x: auto;
 }

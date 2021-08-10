@@ -1,15 +1,23 @@
 import "antd/dist/antd.css";
 import "./App.css";
 
-import { Button, Col, DatePicker, Layout, Row, Modal, Table, Divider } from "antd";
-import readXlsxFile from "read-excel-file";
+import {
+  Button,
+  Col,
+  DatePicker,
+  Layout,
+  Row,
+  Modal,
+  Table,
+  Divider,
+} from "antd";
 import React, { useRef, useState } from "react";
-import Tree from "./components/Tree";
+import readXlsxFile from "read-excel-file";
 import Resume from "./components/Resume";
+import Tree from "./components/Tree";
 import { schemaToHeader } from "./functions/helper";
 import { formatExcelSchema } from "./functions/readExcel";
 const { Header, Content } = Layout;
-
 
 function App() {
   const [previewHeader, setPreviewHeader] = useState([]);
@@ -23,9 +31,9 @@ function App() {
     const formatDate = new Date(date);
     setSelectedDate(formatDate);
     setOrgData(null);
-    setTimeout(()=>{
-      previewContent.length>0 && setOrgData(previewContent)
-    },100);
+    setTimeout(() => {
+      previewContent.length > 0 && setOrgData(previewContent);
+    }, 100);
   }
 
   const openFileDialog = () => {
@@ -37,7 +45,7 @@ function App() {
     event.target.value = null;
     const schema = formatExcelSchema();
     showModal();
-    readXlsxFile(file,{schema}).then((result) => {
+    readXlsxFile(file, { schema }).then((result) => {
       const { rows } = result;
       const header = schemaToHeader(schema);
       setPreviewContent(rows);
@@ -52,9 +60,9 @@ function App() {
   const handleOk = () => {
     console.log(JSON.stringify(previewContent));
     setOrgData(null);
-    setTimeout(()=>{
-      previewContent.length>0 && setOrgData(previewContent)
-    },100);
+    setTimeout(() => {
+      previewContent.length > 0 && setOrgData(previewContent);
+    }, 100);
     setIsModalVisible(false);
   };
 
@@ -65,13 +73,14 @@ function App() {
   return (
     <div className="App">
       <Layout>
-        <Header style={{ position: 'fixed', zIndex: 1, width: '100%' }}>
+        <Header style={{ position: "fixed", zIndex: 1, width: "100%" }}>
           <Row justify="space-between">
             <Col span={8}>
               <DatePicker
                 placeholder="Elegir el mes"
                 onChange={onChangeDate}
-                picker="month" />
+                picker="month"
+              />
             </Col>
             <Col span={8} offset={8} style={{ textAlign: "right" }}>
               <input
@@ -89,13 +98,19 @@ function App() {
           </Row>
         </Header>
 
-        <Content className="site-layout" style={{ padding: '0 1rem', marginTop: 64 }}>
-          <div className="site-layout-background" style={{ padding: '2rem 0', minHeight: 580 }}>
+        <Content
+          className="site-layout"
+          style={{ padding: "0 1rem", marginTop: 64 }}
+        >
+          <div
+            className="site-layout-background"
+            style={{ padding: "2rem 0", minHeight: 580 }}
+          >
             <div className="organigram">
-              <Tree data={orgData} selectedDate={selectedDate}/>
+              <Tree data={orgData} selectedDate={selectedDate} />
             </div>
             <Divider />
-            <Resume data={orgData} selectedDate={selectedDate}/>
+            <Resume data={orgData} selectedDate={selectedDate} />
           </div>
         </Content>
 
@@ -106,10 +121,14 @@ function App() {
           visible={isModalVisible}
           onOk={handleOk}
           width={1300}
-          onCancel={handleCancel}>
-          <Table dataSource={previewContent} columns={previewHeader} pagination={false}/>
+          onCancel={handleCancel}
+        >
+          <Table
+            dataSource={previewContent}
+            columns={previewHeader}
+            pagination={false}
+          />
         </Modal>
-
       </Layout>
     </div>
   );
